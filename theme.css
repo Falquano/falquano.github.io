@@ -1,0 +1,107 @@
+body {
+    background-color: #3D3D4A;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 25px 200px;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: #000 4px 4px 0px;
+    padding: 25px;
+    font-size: 3em;
+}
+
+h2 {
+    border: 3px solid white;
+    background-color: white;
+    color: #3D3D4A;
+    box-shadow: 5px 5px 0px black;
+    transition: all .3s ease-out;
+    margin-top: 50px;
+}
+
+h2:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 10px 10px 0px black;
+}
+
+p {
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+a {
+    color: #9999EE;
+}
+
+ul {
+  list-style: none; /* Remove default bullets */
+}
+
+#raceli  {
+    font-style: italic;
+    font-weight: normal;
+    column-count: 2;
+}
+
+#raceli a {
+    text-decoration: none;
+    color: white;
+}
+
+#raceli ul li {
+    font-style: normal;
+    font-weight: bold;
+}
+
+#classli {
+    padding: 0px 10%;
+    font-weight: bold;
+    font-style: normal;
+    column-count: 2;
+    column-rule: 1px solid black;
+    column-gap: 25%;
+}
+
+#classli h3 {
+    margin-bottom: 5px;
+}
+
+#classli ul li {
+    font-weight: normal;
+    font-style: italic
+}
+
+#pcli h3 {
+    border: 3px solid white;
+    background: white;
+    color: #3D3D4A;
+    text-align: center;
+    transition: color .5s;
+}
+
+#pcli #hjy:hover {
+    color: #1BB0EA;
+}
+
+#pcli #hna:hover {
+    color: #221D11;
+}
+
+#pcli #hry:hover {
+    color: #A2262F;
+}
+
+#pcli #hou:hover {
+    color: #CEA431;
+}
+
+#pcli #hth:hover {
+    color: #E45F1D;
+}
+
+#pcli .PC {
+    margin: 15px 30px;
+    padding: 5px 20px;
+}
