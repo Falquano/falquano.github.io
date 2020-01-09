@@ -3,33 +3,74 @@ body {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 110%;
-    padding: 10px;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
 }
 
 #main {
   padding: 0px;
   margin: 0px;
   vertical-align: middle;
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
 .button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  width: 200px;
-  height: 200px;
-  line-height: 100px;
-  text-align: center;
+  display: grid;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px;
-  vertical-align: middle;
+  grid-template-rows: 1fr min-content;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  flex-wrap: wrap;
+  background: transparent;
+	color: #fff;
+	border: 10px solid #fff;
+	padding: 0.8rem 2rem;
+	font: 24px "Margarine", sans-serif;
+	outline: none;
+	cursor: pointer;
+	position: relative;
+	transition: 0.2s ease-in-out;
+	letter-spacing: 2px;
 }
 
 .button > p {
   vertical-align: middle;
   font-size: 200%;
   font-weight: bold;
+}
+
+#dad {
+  background-color: #7B97B9;
+  border-color: #7699C2
+}
+
+#dad:hover {
+  background-color: #5D8ABE;
+  border-color: #7499C5;
+}
+
+#cat {
+  background-color: white;
+  border-color: #202020;
+  color: #202020;
+}
+
+#cat:hover {
+  background-color: ;
+  border-color: ;
+  color: ;
+}
+
+#dnd {
+  background: rgb(198,49,49);
+  background: -moz-radial-gradient(circle, rgba(198,49,49,1) 0%, rgba(59,26,26,1) 100%);
+  background: -webkit-radial-gradient(circle, rgba(198,49,49,1) 0%, rgba(59,26,26,1) 100%);
+  background: radial-gradient(circle, rgba(198,49,49,1) 0%, rgba(59,26,26,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c63131",endColorstr="#3b1a1a",GradientType=1);
+  border-color: #D4AF37;
+  color: #D4AF37;
 }
