@@ -1,0 +1,58 @@
+<?xml version='1.0' ?>
+
+<Dialogues>
+	<line tag='MetricsPlayground' id='1' talker='The King'>LITTLE KNIGHT ! We need thy help !</line>
+	<line tag='MetricsPlayground' id='2'>My dear queen's CROWN was stolen by an EVIL WIZARD.</line>
+	<line tag='MetricsPlayground' id='3'>He went off EAST into the darkest parts of THE FOREST.</line>
+	<line tag='MetricsPlayground' id='4'>Please, course him and return my love's CROWN !</line>
+	
+	<line tag='Home' id='1' talker='Knight'>Oh no !</line>
+	<line tag='Home' id='2' talker='Knight'>I'm going to be late for the King's assignment !</line>
+	
+	<line tag='ThroneRoom' id='1' talker='King'>Ah, there thou art little knight.</line>
+	<line tag='ThroneRoom' id='2'>The present day, thee shalt taketh thy first quest.</line>
+	<line tag='ThroneRoom' id='3'>One of mine own many crowns wast stolen by an evil wizard</line>
+	<line tag='ThroneRoom' id='4'>Thy quest is to retrieveth it. The wizard hath left for the forest kingdom.</line>
+	<line tag='ThroneRoom' id='5'>Thus thee shouldst first wend speaketh to the forest king</line>
+	<line tag='ThroneRoom' id='6'>Go now little knight. May luck findeth thy way.</line>
+	<line tag='ThroneRoom' id='7' nextLevel='Woodland I'>Casse toi</line>
+	
+	<line tag='WoodlandI' id='1' talker='Knight'>Darn it. I'm lost again.</line>
+	<line tag='WoodlandI' id='2'>Let's hope someone can show me the way.</line>
+	
+	<line tag='Woodcutter' id='1' talker='Woodcutter'>Hello there. What are you doing so deep in the forest ?</line>
+	<line tag='Woodcutter' id='2'>Not very talkative huh ? Well, that's okay.</line>
+	<line tag='Woodcutter' id='3'>Just be careful, some of us forest-dwellers lay traps in some places.</line>
+	<line tag='Woodcutter' id='4'>Also be on the lookout for a deep hole out east.</line>
+	<line tag='Woodcutter' id='4'>Just watch your step and you'll be fine.</line>
+	
+	<line tag='Dream' id='1' talker='Deity'>It appears you have died falling in a deep hole, little knight.</line>
+	<line tag='Dream' id='2'>But you have not yet fulfilled your destiny.</line>
+	<line tag='Dream' id='2'>I will get you back into the world again, stronger.</line>
+	<line tag='Dream' id='3' nextLevel='Woodland II'>zip</line>
+	
+	<line tag='Goblins' id='1' talker='Bongy'>G'd murning.</line>
+	<line tag='Goblins' id='2' talker='Gonby'>Good mu'ning.</line>
+	<line tag='Goblins' id='3' talker='Bongy'>I'm Bongy.</line>
+	<line tag='Goblins' id='4' talker='Gonby'>And I'm Gonby.</line>
+	<line tag='Goblins' id='5' talker='Bongy'>And you are ?</line>
+	<line tag='Goblins' id='6' talker='Gonby'>A little knight, I see.</line>
+	<line tag='Goblins' id='7' talker='Bongy'>A wizard you seek.</line>
+	<line tag='Goblins' id='8' talker='Gonby'>We've seen him, we have.</line>
+	<line tag='Goblins' id='9' talker='Bongy'>Runnin' off in the Tree.</line>
+	<line tag='Goblins' id='10' talker='Gonby'>Might catch 'im if you're fast.</line>
+	<line tag='Goblins' id='11' talker='Bongy'>Up the branch you should go.</line>
+	<line tag='Goblins' id='12' talker='Gonby'>Good luck.</line>
+	
+	<line tag='Passageway' id='1' talker='Wizard'>!!!</line>
+	<line tag='Passageway' id='2'>A knight !</line>
+	<line tag='Passageway' id='3'>You'll NEVER catch me ALIVE !</line>
+	<line tag='Passageway' id='4'>Abraca cadabra !</line>
+	<line tag='Passageway' id='5' nextLevel='The Tree II'>bliblibli</line>
+	
+	<line tag='TreeThroneRoom' id='1' talker='Forest King'>What do you need, little knight ?</line>
+	<line tag='TreeThroneRoom' id='2' talker="Knight">...</line>
+	<line tag='TreeThroneRoom' id='3' talker='Forest King'>I see... The wizard must be stopped.</line>
+	<line tag='TreeThroneRoom' id='4'>You have my benediction to pursue him in my lands.</line>
+	<line tag='TreeThroneRoom' id='5' nextLevel='Epilogue'>Ploupidoup</line>
+</Dialogues>
