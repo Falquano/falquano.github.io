@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1620151014,
+	"version": 1620153189,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -14,6 +14,7 @@
 		"images/scorecounter.png",
 		"images/noyau-sheet0.png",
 		"images/atmosphère-sheet0.png",
+		"images/explosion.png",
 		"media/bip_b.m4a",
 		"media/bip_b.ogg",
 		"media/bip_g.m4a",
@@ -42,6 +43,8 @@
 		"media/bgm_idle.ogg",
 		"media/bgm_spacedown.m4a",
 		"media/bgm_spacedown.ogg",
+		"media/woosh.m4a",
+		"media/woosh.ogg",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",
