@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1620660420,
+	"version": 1620764532,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -49,6 +49,8 @@
 		"images/apparitionaliment1-sheet0.png",
 		"images/collider-sheet0.png",
 		"images/destroytapis-sheet0.png",
+		"images/deadblockcollider-sheet0.png",
+		"images/deadblockcollider-sheet1.png",
 		"media/wrong.ogg",
 		"media/poubelle.ogg",
 		"media/clochette.m4a",
