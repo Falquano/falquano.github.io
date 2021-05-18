@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1621333768,
+	"version": 1621341403,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -48,6 +48,10 @@
 		"media/bgm_idle.ogg",
 		"media/bgm_spacedown.m4a",
 		"media/bgm_spacedown.ogg",
+		"media/bgm_new_bass.m4a",
+		"media/bgm_new_bass.ogg",
+		"media/bgm_new_idle.m4a",
+		"media/bgm_new_idle.ogg",
 		"media/woosh.m4a",
 		"media/woosh.ogg",
 		"icon-16.png",
