@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1621544595,
+	"version": 1621548296,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -20,6 +20,7 @@
 		"images/atmosphèrevisu-sheet0.png",
 		"images/noyau-sheet0.png",
 		"images/sprite3-sheet0.png",
+		"images/death-sheet0.png",
 		"media/bip_b.m4a",
 		"media/bip_b.ogg",
 		"media/bip_g.m4a",
