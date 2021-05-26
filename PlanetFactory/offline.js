@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1621943714,
+	"version": 1622034996,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -13,6 +13,7 @@
 		"images/camera-sheet0.png",
 		"images/scorecounter.png",
 		"images/death-sheet0.png",
+		"images/gameovermessage-sheet0.png",
 		"images/sprite-sheet0.png",
 		"images/sprite2-sheet0.png",
 		"images/sprite2-sheet1.png",
@@ -22,6 +23,7 @@
 		"images/sprite5-sheet0.png",
 		"images/explosion.png",
 		"images/atmosphèrevisu-sheet0.png",
+		"images/atmosphèrevisu-sheet1.png",
 		"images/noyau-sheet0.png",
 		"images/atmosphèrebox-sheet0.png",
 		"media/bip_b.m4a",
