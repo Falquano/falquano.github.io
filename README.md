@@ -12,6 +12,8 @@ This is a collection of my stuff, basically. There are game prototypes, ttrpg re
 
 [Proto Buddy](./Buddy Coop Prototype Build/index.html), a co-operative plateformer
 
+[LD Prototype](./LDPlateformerTest/index.html), a plateformer prototype
+
 
 # TTRPG Ressources
 
