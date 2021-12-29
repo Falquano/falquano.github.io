@@ -17,7 +17,7 @@ This is a collection of my stuff, basically. There are game prototypes, ttrpg re
 
 # TTRPG Ressources
 
-[Darqui Nomis Wiki](), a wiki for my Pathfinder2e/D&D5e Setting
+[Darqui Nomis Wiki](./DarquiNomis/index.html), a wiki for my Pathfinder2e/D&D5e Setting (in french)
 
 [All New D&D](./ANDND/index.html), a page made to list all available character options for an old D&D campaign
 
