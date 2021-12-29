@@ -1,0 +1,106 @@
+<!doctype html>
+<HTML lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Darqui Nomis - Noms</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="text/javascript" src="NameGenerator.js"></script>
+
+    <script>
+        var selectedLanguage;
+
+        function getRequestDescription(language, female, neutral, male) {
+            var word = language;
+            if (female)
+            {
+                word += ", female";
+            }
+            if (neutral)
+            {
+                word += ", neutral";
+            }
+            if (male)
+            {
+                word += ", male";
+            }
+
+            return word;
+        }
+
+        function updateNames() {
+            console.log("UPDATE");
+
+            if (selectedLanguage == null)
+                return; 
+
+            var noms = "";
+            for (var i = 0; i < 25 * 3; i++) {
+                //noms += getName(language) + "<br>"; 
+                noms += getName(selectedLanguage.id, femaleChecked(), neutralChecked(), maleChecked()) + "<br>";
+            }
+
+            document.getElementById("names").innerHTML = noms;
+            console.log("done !");
+        }
+
+        function changeLanguage(language) {
+            console.log(getRequestDescription(language, femaleChecked(), neutralChecked(), maleChecked()));
+            selectedLanguage = getLanguage(language);
+
+            if (selectedLanguage == null)
+            {
+                document.getElementById("currentLanguage").innerHTML = "Erreur";
+                document.getElementById("languageHelp").href = "languages.html";
+            }
+            else
+            {
+                document.getElementById("currentLanguage").innerHTML = selectedLanguage.name;
+                document.getElementById("languageHelp").href = "languages.html#" + selectedLanguage.id;
+            }
+
+            updateNames();
+        }
+
+        function maleChecked() {
+            return document.getElementById("male").checked;
+        }
+        
+        function femaleChecked() {
+            return document.getElementById("female").checked;
+        }
+        
+        function neutralChecked() {
+            return document.getElementById("neutral").checked;
+        }
+    </script>
+</head>
+<body>
+    <div id="header">
+        <a href="index.html"><span id="title">Darqui Nomis</span></a>    <span id="author">par Victor Fanton</span>
+        <hr>
+    </div>
+    <h1 id="currentLanguage">Langue</h1>
+    <br>
+    <div id="nameoptions">
+        <div>
+            <input type="checkbox" id="female" name="female" checked onclick="updateNames()"> <label for="female" >Female</label>
+            <input type="checkbox" id="neutral" name="neutral" checked onclick="updateNames()"> <label for="neutral">Neutral</label>
+            <input type="checkbox" id="male" name="male" checked onclick="updateNames()"> <label for="male">Male</label>
+        </div>
+        <div>
+            <button onclick="changeLanguage('dzaka')">Dzaka</button>
+            <button onclick="changeLanguage('klaglist')">Klaglist</button>
+            <button onclick="changeLanguage('wonyi')">Wonyi</button>
+            <button onclick="changeLanguage('wehejam')">Wehèjam</button>
+            <button onclick="changeLanguage('raedos')">Rædos</button>
+        </div>
+    </div>
+    <p id="names">Noms</p>
+    <div style="text-align: center;">
+        <a id="languageHelp" href="languages.html">Aide de prononciation</a>
+    </div>
+</body>
+<script>
+    changeLanguage(getRandomLanguage().id);
+</script>
+</HTML>

@@ -1,0 +1,50 @@
+body {
+    background-color: #F5F4E7;
+    padding: 25px 25%;
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1, h2, h3, #title, #author {
+    font-family: "High Tower Text", Calibri, 'Trebuchet MS', sans-serif;
+    color: #841020;
+}
+
+#author {
+    font-size: large;
+    color: grey;
+    font-weight: lighter;
+}
+
+#title {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+#names {
+    columns: 3;
+    text-align: center;
+}
+
+#header a {
+    text-decoration: none;
+}
+
+#nameoptions {
+    text-align: center;
+}
+
+#currentLanguage {
+    text-align: center;
+}
+
+.langage table, .langage th, .langage td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 4px;
+    margin: 0px;
+    border-collapse: collapse;
+}
+
+.langage .sideways {
+    transform: rotate(-90deg);
+}
