@@ -22,12 +22,20 @@
         } else if (y == 'D') {
             document.getElementById("kitty").setAttribute("src", "bongo/Right.png");
             console.log("Right");
+			var audio = new Audio('./sfx/paf.wav');
+			audio.play();
         } else if (y == 'S') {
             document.getElementById("kitty").setAttribute("src", "bongo/Both.png");
             console.log("Both");
+			var audio1 = new Audio('./sfx/pif.wav');
+			var audio2 = new Audio('./sfx/paf.wav');
+			audio1.play();
+			audio2.play();
         } else if (y == 'Q') {
             document.getElementById("kitty").setAttribute("src", "bongo/Left.png");
             console.log("Left");
+			var audio = new Audio('./sfx/pif.wav');
+			audio.play();
         }
     }
 </script>
