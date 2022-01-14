@@ -24,4 +24,4 @@ This is a collection of my stuff, basically. There are game prototypes, ttrpg re
 
 # Misc.
 
-[Bongo Cat](./Bongo Cat/bongo.html), a simple bongo cat with no sounds.
+[Bongo Cat](./Bongo Cat/bongo.html), a simple bongo cat. Use Q S and D.
