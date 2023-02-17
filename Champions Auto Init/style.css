@@ -1,0 +1,97 @@
+body {
+    background-color: #080808;
+    font-family: "Lucida Console", monospace;
+    color: white;
+    padding: 1em;
+}
+
+button {
+    background-color: #202020;
+    border-radius: 0%;
+    border: 1px solid whitesmoke;
+    color: white;
+    min-width: 2em;
+    min-height: 2em;
+    
+    transition: background-color .2s;
+}
+
+button:hover {
+    background-color: #282828;
+}
+
+#cards {
+    margin: auto;
+    padding: 60px 10px;
+    display: flex;
+}
+
+.card {
+    width: 6.5cm;
+    height: 6.5cm;
+    background-color: #303030;
+    border: 1px solid snow;
+    padding: 1cm;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, .25);
+    transition: transform .4s, color .3s, background-color .3s, box-shadow .35s;
+}
+
+.card:hover {
+    box-shadow: 5px 80px 3px rgba(0, 0, 0, .25);
+}
+
+.card:nth-of-type(1) {
+    z-index: 5
+}
+
+.card:nth-of-type(1):hover {
+    transform: translateY(-50px) rotate(-2deg);    
+}
+
+.card:nth-of-type(2) {
+    background-color: #282828;
+    color: #D4D4D4;
+    transform: translate(-40px, -5px) rotate(3deg);
+    z-index: 4;
+}
+.card:nth-of-type(2):hover {
+    transform: translate(-40px, -50px) rotate(-2deg);
+}
+
+.card:nth-of-type(3) {
+    background-color: #202020;
+    color: #AAAAAA;
+    transform: translate(-180px, 5px) rotate(6deg);
+    z-index: 3;
+}
+.card:nth-of-type(3):hover {
+    transform: translate(-180px, -50px) rotate(-2deg);
+}
+
+.card:nth-of-type(4) {
+    background-color: #181818;
+    color: #7F7F7F;
+    transform: translate(-360px, 10px) rotate(9deg);
+    z-index: 2;
+}
+.card:nth-of-type(4):hover {  
+    transform: translate(-360px, -50px) rotate(-2deg);
+}
+
+.card:nth-of-type(5) {
+    background-color: #101010;
+    color: #555555;
+    transform: translate(-580px, 15px) rotate(12deg);
+    z-index: 1;
+}
+.card:nth-of-type(5):hover {
+    transform: translate(-580px, -50px) rotate(-2deg);
+}
+
+.card:hover {
+    z-index: 100;
+    color: white;
+    background-color: #303030;
+}
