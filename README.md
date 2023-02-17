@@ -21,6 +21,7 @@ This is a collection of my stuff, basically. There are game prototypes, ttrpg re
 
 [All New D&D](./ANDND/index.html), a page made to list all available character options for an old D&D campaign
 
+[Champions Auto-Init](./Champions Auto Init/index.html)
 
 # Misc.
 
