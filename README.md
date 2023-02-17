@@ -8,9 +8,9 @@ This is a collection of my stuff, basically. There are game prototypes, ttrpg re
 
 [Planet Factory](./PlanetFactory/index.html), a school group project
 
-[Little Knight](./Little Knight/index.html), a little plateformer
+[Little Knight](./Little%20Knight/index.html), a little plateformer
 
-[Proto Buddy](./Buddy Coop Prototype Build/index.html), a co-operative plateformer
+[Proto Buddy](./Buddy%20Coop%20Prototype Build/index.html), a co-operative plateformer
 
 [LD Prototype](./LDPlateformerTest/index.html), a plateformer prototype
 
@@ -21,8 +21,8 @@ This is a collection of my stuff, basically. There are game prototypes, ttrpg re
 
 [All New D&D](./ANDND/index.html), a page made to list all available character options for an old D&D campaign
 
-[Champions Auto-Init](./Champions Auto Init/index.html)
+[Champions Auto-Init](./Champions%20Auto%20Init/index.html)
 
 # Misc.
 
-[Bongo Cat](./Bongo Cat/bongo.html), a simple bongo cat. Use Q S and D.
+[Bongo Cat](./Bongo%20Cat/bongo.html), a simple bongo cat. Use Q S and D.
