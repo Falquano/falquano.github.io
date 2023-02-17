@@ -77,7 +77,7 @@ function addCharacterEditDiv(index) {
 }
 
 function addCard(charIndex) {
-    let index = getRandomInt(0, deck.length);
+    let index = getRandomInt(0, deck.length + 1);
     deck.splice(index, 0, charIndex);
 
     if (index < 5) {
