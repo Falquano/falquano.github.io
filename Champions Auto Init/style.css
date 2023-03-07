@@ -20,6 +20,11 @@ button:hover {
     background-color: #282828;
 }
 
+#board {
+    height: 8cm;
+    width: 100%;
+}
+
 #cards {
     margin: auto;
     padding: 60px 10px;
@@ -27,8 +32,8 @@ button:hover {
 }
 
 .card {
-    width: 6.5cm;
-    height: 6.5cm;
+    width: 5cm;
+    height: 5cm;
     background-color: #303030;
     border: 1px solid snow;
     padding: 1cm;
@@ -47,7 +52,7 @@ button:hover {
 }
 
 .card:nth-of-type(1):hover {
-    transform: translateY(-50px) rotate(-2deg);    
+    transform: translateY(-25px) rotate(-2deg);    
 }
 
 .card:nth-of-type(2) {
@@ -94,4 +99,14 @@ button:hover {
     z-index: 100;
     color: white;
     background-color: #303030;
+}
+
+#next {
+    position:absolute;
+    height: 8cm;
+    width: 2cm;
+    right: 0px;
+    top: 0px;
+    z-index: 100;
+    opacity: 75%;
 }

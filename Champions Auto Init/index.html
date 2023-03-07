@@ -2,37 +2,42 @@
     <head>
         <title>Champions Auto-Initiative</title>
         <script src="script.js"></script>
+        <script src="cookies.js"></script>
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body onload="loadHand();">
-        <div id="cards">
-            <div class="card 1" hidden>
-                <h2 class="name">Name</h2>
-                <p class="speed">3 spd</p>
+    <body onload="loadPage(); createEvents();">
+        <div id="board">
+            <div id="cards">
+                <div class="card 1" hidden>
+                    <h2 class="name">Name</h2>
+                    <p class="speed">3 spd</p>
+                </div>
+                <div class="card 2" hidden>
+                    <h2 class="name">Name</h2>
+                    <p class="speed">1 spd</p>
+                </div>
+                <div class="card 3" hidden>
+                    <h2 class="name">Name</h2>
+                    <p class="speed">2 spd</p>
+                </div>
+                <div class="card 4" hidden>
+                    <h2 class="name">Name</h2>
+                    <p class="speed">2 spd</p>
+                </div>
+                <div class="card 5" hidden>
+                    <h2 class="name">Name</h2>
+                    <p class="speed">2 spd</p>
+                </div>
             </div>
-            <div class="card 2" hidden>
-                <h2 class="name">Name</h2>
-                <p class="speed">1 spd</p>
-            </div>
-            <div class="card 3" hidden>
-                <h2 class="name">Name</h2>
-                <p class="speed">2 spd</p>
-            </div>
-            <div class="card 4" hidden>
-                <h2 class="name">Name</h2>
-                <p class="speed">2 spd</p>
-            </div>
-            <div class="card 5" hidden>
-                <h2 class="name">Name</h2>
-                <p class="speed">2 spd</p>
-            </div>
+            <button type="button" onclick="nextCard()" id="next">-></button>
         </div>
-        <button type="button" onclick="nextCard()">NEEEEEXT</button>
-        <button type="button" onclick="resetDeck()">New Turn</button>
+        <button type="button" onclick="nextCard()">Next</button>
+        <button type="button" onclick="resetDeck()">Shuffle</button>
         <div id="edit">
             <button type="button" onclick="addCharacter()">Add character</button>
             <div hidden><input type="text" class="name" minlength="1" size="20" placeholder="Name" value="Super"> <button type="button" class="minus">-</button> <label class="spd">2</label> spd <button type="button" class="plus">+</button></p></div>
         </div>
+        <span hidden id="eventholder"></span>
     </body>
 </HTML>
