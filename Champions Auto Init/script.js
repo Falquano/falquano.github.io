@@ -6,6 +6,9 @@ var handNodes = [];
 
 const names = ["Hero", "Villain", "Bystander", "Fighter", "Monster", "Civilian", "Vigilante", "Mastermind", "Mutant", "Champion", "Icon"];
 
+var eventHolder;
+var charsModEvent;
+
 function loadHand() {
     const handDiv = document.getElementById("cards");
     for (let i = 0; i < 5; i++) {
@@ -23,6 +26,20 @@ function addCharacter() {
     
     addCard(characters.length - 1);
     addCard(characters.length - 1);
+
+    eventHolder.dispatchEvent(charsModEvent);
+}
+
+function addExistingCharacter(character) {
+    characters.push(character);
+
+    addCharacterEditDiv(characters.length - 1);
+    
+    for (let i = 0; i < character.speed; i++) {
+        addCard(characters.length - 1);
+    }
+
+    eventHolder.dispatchEvent(charsModEvent);
 }
 
 function addCharacterEditDiv(index) {
@@ -38,6 +55,7 @@ function addCharacterEditDiv(index) {
     const txtHandler = function(e) {
         characters[index].name = e.target.value;
         redrawCards();
+        eventHolder.dispatchEvent(charsModEvent);        
     }
     txtInput.addEventListener('input', txtHandler);
     // Et on édite la valeur par défaut vite fait
@@ -53,8 +71,9 @@ function addCharacterEditDiv(index) {
 
         characters[index].speed--;
         newChar.getElementsByClassName("spd")[0].innerHTML = characters[index].speed;
-        console.debug(index);
+        //console.debug(index);
         removeCard(index);
+        eventHolder.dispatchEvent(charsModEvent);
 
         if (characters[index].speed <= 0) {
             minus.disabled = true;
@@ -68,8 +87,9 @@ function addCharacterEditDiv(index) {
     const plusHandler = function(e) {
         characters[index].speed++;
         newChar.getElementsByClassName("spd")[0].innerHTML = characters[index].speed;
-        console.debug(index);
+        //console.debug(index);
         addCard(index);
+        eventHolder.dispatchEvent(charsModEvent);
 
         minus.disabled = false;
     }
@@ -80,7 +100,7 @@ function addCard(charIndex) {
     let index = getRandomInt(0, deck.length + 1);
     deck.splice(index, 0, charIndex);
 
-    if (index < 5) {
+    if (/*index < 5*/ true) {
         redrawCards();
     }
 }
@@ -146,4 +166,10 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+function loadPage() {
+    charsModEvent = new Event("onCharactersModified");
+    eventHolder = document.getElementById("eventholder");
+    loadHand();
 }
