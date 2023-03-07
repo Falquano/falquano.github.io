@@ -94,6 +94,8 @@ function addCharacterEditDiv(index) {
         minus.disabled = false;
     }
     plus.addEventListener('click', plusHandler);
+
+    newChar.getElementsByClassName("spd")[0].innerHTML = characters[index].speed
 }
 
 function addCard(charIndex) {
