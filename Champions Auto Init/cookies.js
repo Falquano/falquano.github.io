@@ -25,7 +25,9 @@ function saveState() {
     if (characters == null || characters.length <= 0) {
         return;
     }
-    var serialCharacters = JSON.stringify(characters);//.replaceAll('"', "'");
+    var cleanChars = characters.filter(char => char.speed > 0);
+
+    var serialCharacters = JSON.stringify(cleanChars);//.replaceAll('"', "'");
 
     setCookie("characters", serialCharacters, 15);
 
@@ -51,9 +53,9 @@ function loadState() {
 function createEvents() {
     document.getElementById("eventholder").addEventListener("onCharactersModified", saveState);
     
-    document.getElementById("eventholder").addEventListener("onCharactersModified", (e) => {
+    /*document.getElementById("eventholder").addEventListener("onCharactersModified", (e) => {
         console.log("merde");
-    });
+    });*/
 
     loadState();
 }

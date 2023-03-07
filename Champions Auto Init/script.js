@@ -30,6 +30,18 @@ function addCharacter() {
     eventHolder.dispatchEvent(charsModEvent);
 }
 
+function removeCharacter(index) {
+    for (let i = 0; i < characters[index].speed; i++) {
+        removeCard(index);
+    }
+    characters[index].speed = 0;
+    eventHolder.dispatchEvent(charsModEvent);
+    
+    document.getElementById("edit").children[index].hidden = true;
+
+    //characters.splice(index, 1);
+}
+
 function addExistingCharacter(character) {
     characters.push(character);
 
@@ -94,6 +106,14 @@ function addCharacterEditDiv(index) {
         minus.disabled = false;
     }
     plus.addEventListener('click', plusHandler);
+
+    // Lire pression de -
+    const suppr = newChar.getElementsByClassName("suppr")[0];
+    suppr.characterIndex = index;
+    const supprHandler = function(e) {
+        removeCharacter(index);
+    }
+    suppr.addEventListener('click', supprHandler);
 
     newChar.getElementsByClassName("spd")[0].innerHTML = characters[index].speed
 }
