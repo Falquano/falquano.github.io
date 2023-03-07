@@ -25,7 +25,7 @@ function saveState() {
     if (characters == null || characters.length <= 0) {
         return;
     }
-    var serialCharacters = JSON.stringify(characters).replaceAll('"', "'");
+    var serialCharacters = JSON.stringify(characters);//.replaceAll('"', "'");
 
     setCookie("characters", serialCharacters, 15);
 
