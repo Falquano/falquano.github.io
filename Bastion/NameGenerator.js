@@ -39,8 +39,10 @@ class Language {
         this.nodes = nodes;
         this.min = min;
         this.max = max;
+        /* 
         this.patterns = ["^.+$"];
-        this.patterns_n = ["Default"];
+        this.patterns_n = ["Default"]; */
+        this.patterns = [new LPattern("Default", "^.+$", x => x)]
     }
 
     generate() {
@@ -65,7 +67,7 @@ class Language {
         if (tests == 100)
             return "Error : no word fits mode";
 
-        return word;
+        return this.patterns[mode].process(word);
     }
     
     /*
@@ -92,8 +94,7 @@ class Language {
     */
 
     doesFit(word, mode) {
-        let re = new RegExp(this.patterns[mode]);
-        return re.test(word);
+        return this.patterns[mode].fits(word);
     }
 }
 
@@ -116,8 +117,15 @@ const ginio = new Language("ginio", "Ginio",
                         "st", "sp", "sm", "ks", "kn", "km", "ks", "ph"], 1), // C
     new SyllabusNode(["i", "o", "a", "e", "io", "ia"], 1), // V
 ], 2, 4);
-ginio.patterns.push("^.+[iuoaes]$");
-ginio.patterns_n.push("Name");
+
+ginio.patterns.push(new LPattern("Prénom", "^.+[iuoaes]$", 
+    x => {
+        if (rand(0, 10) < 2) {
+            x = x + "s";
+        }
+
+        return upperFirst(x);
+    }));
 
 const languages = [
     ginio
@@ -137,7 +145,7 @@ function getNameModed(languageName, mode) {
     if (language == null)
         return "Language " + languageName + " not found !";
 
-    return upperFirst(language.generate(mode));
+    return language.generateModed(mode);
 }
 
 function getName(languageName) {

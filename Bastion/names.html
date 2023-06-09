@@ -13,7 +13,7 @@
             var word = language;
             
             if (selectedLanguage)
-                word += " (" + selectedLanguage.patterns_n[mode] + ")";
+                word += " (" + selectedLanguage.patterns[mode].name + ")";
 
             return word;
         }
@@ -27,7 +27,7 @@
             var noms = "";
             for (var i = 0; i < 25 * 3; i++) {
                 //noms += getName(language) + "<br>"; 
-                noms += getName(selectedLanguage.id, getMode()) + "<br>";
+                noms += getNameModed(selectedLanguage.id, getMode()) + "<br>";
             }
 
             document.getElementById("names").innerHTML = noms;
@@ -61,9 +61,9 @@
                 }
                 
                 // On ajoute les modes
-                for (let i = 1; i < selectedLanguage.patterns_n.length; i++) {
+                for (let i = 1; i < selectedLanguage.patterns.length; i++) {
                     let opt = select.appendChild(document.createElement("option"));
-                    opt.innerHTML = selectedLanguage.patterns_n[i];
+                    opt.innerHTML = selectedLanguage.patterns[i].name;
                     opt.value = i;
                 }
             }
