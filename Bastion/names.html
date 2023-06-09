@@ -1,0 +1,105 @@
+<!doctype html>
+<HTML lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bastion - Noms</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="text/javascript" src="NameGenerator.js"></script>
+
+    <script>
+        var selectedLanguage;
+
+        function getRequestDescription(language, mode) {
+            var word = language;
+            
+            if (selectedLanguage)
+                word += " (" + selectedLanguage.patterns_n[mode] + ")";
+
+            return word;
+        }
+
+        function updateNames() {
+            console.log("UPDATE");
+
+            if (selectedLanguage == null)
+                return; 
+
+            var noms = "";
+            for (var i = 0; i < 25 * 3; i++) {
+                //noms += getName(language) + "<br>"; 
+                noms += getName(selectedLanguage.id, getMode()) + "<br>";
+            }
+
+            document.getElementById("names").innerHTML = noms;
+            console.log("done !");
+        }
+
+        function changeLanguage(language) {
+            console.log(getRequestDescription(language, getMode()));
+
+            if (selectedLanguage == getLanguage(language)) {
+                updateNames();
+                return;
+            }
+
+            selectedLanguage = getLanguage(language);
+
+            if (selectedLanguage == null)
+            {
+                document.getElementById("currentLanguage").innerHTML = "Erreur";
+                document.getElementById("languageHelp").href = "languages.html";
+            }
+            else
+            {
+                document.getElementById("currentLanguage").innerHTML = selectedLanguage.name;
+                document.getElementById("languageHelp").href = "languages.html#" + selectedLanguage.id;
+
+                // On réinitialize les modes
+                select = document.getElementById("mode");
+                while(select.childElementCount > 1) {
+                    select.removeChild(lastChild);
+                }
+                
+                // On ajoute les modes
+                for (let i = 1; i < selectedLanguage.patterns_n.length; i++) {
+                    let opt = select.appendChild(document.createElement("option"));
+                    opt.innerHTML = selectedLanguage.patterns_n[i];
+                    opt.value = i;
+                }
+            }
+
+            updateNames();
+        }
+
+        function getMode() {
+            return document.getElementById("mode").value;
+        }
+    </script>
+</head>
+<body>
+    <div id="header">
+        <a href="index.html"><span id="title">Bastion</span></a>    <span id="author">par Victor Fanton</span>
+        <hr>
+    </div>
+    <h1 id="currentLanguage">Langue</h1>
+    <br>
+    <div id="nameoptions">
+        <div>
+            <button onclick="changeLanguage('ginio')">Ginio</button>
+            <button onclick="changeLanguage('b')">B</button>
+            <button onclick="changeLanguage('c')">C</button>
+        </div>
+        </br>
+        <select name="mode" id="mode" onchange="updateNames()">
+            <option value=0>Default</option>
+        </select>
+    </div>
+    <p id="names">Noms</p>
+    <div style="text-align: center;">
+        <a id="languageHelp" href="languages.html" target="_blank" rel="noopener noreferrer">Aide de prononciation</a>
+    </div>
+</body>
+<script>
+    changeLanguage(getRandomLanguage().id);
+</script>
+</HTML>
