@@ -57,7 +57,7 @@
                 // On réinitialize les modes
                 select = document.getElementById("mode");
                 while(select.childElementCount > 1) {
-                    select.removeChild(lastChild);
+                    select.removeChild(select.lastChild);
                 }
                 
                 // On ajoute les modes

@@ -6,6 +6,11 @@ function upperFirst(string) {
     return string[0].toUpperCase() + string.substring(1);
 }
 
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
+
+
 function removeDoubleFirst(word) {
     if (word[0] == word[1])
         return word.slice(1, word.length);
@@ -117,8 +122,37 @@ ginio.patterns.push(new LPattern("Prénom", "^.+[iuoaes]$",
         return upperFirst(removeDoubleExtremities(x));
     }));
 
+const baccents = {
+    "e": ["é", "è", "ë"],
+    "a": ["ä"],
+    "o": ["ö"],
+    "u": ["ü"]
+};
+const bowels = ["e", "u", "a", "o"];
+
+function accentuateLast(word) {
+    for(let i = word.length - 1; i > 0; i--) {
+        if (bowels.includes(word[i])) {
+            let nword = word;
+            return nword.replaceAt(i, baccents[nword[i]][rand(0, baccents[nword[i]].length)]);
+        }
+    }
+    return word;
+}
+
+const b = new Language("b", "B",
+[
+    new SyllabusNode(["pf", "ts", "ch", "sh", "g", "y", "b", "d", "v"], (x, l) => true), // C
+    new SyllabusNode(["e", "u", "a", "o"], (x, l) => true), // V
+    new SyllabusNode(["ch", "sh", "g", "y", "b", "d", "v"], (x, l) => Math.random() < .2), // C
+], 2, 5);
+b.patterns.push(new LPattern("Person", "^.+$", x => {
+    return upperFirst(accentuateLast(x));
+}))
+
 const languages = [
-    ginio
+    ginio,
+    b
 ];
 
 function getLanguage(languageName) {
