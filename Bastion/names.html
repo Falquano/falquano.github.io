@@ -35,14 +35,14 @@
         }
 
         function changeLanguage(language) {
-            console.log(getRequestDescription(language, getMode()));
-
             if (selectedLanguage == getLanguage(language)) {
+                console.log(getRequestDescription(language, getMode()));
                 updateNames();
                 return;
             }
 
             selectedLanguage = getLanguage(language);
+            console.log(getRequestDescription(language, getMode()));
 
             if (selectedLanguage == null)
             {

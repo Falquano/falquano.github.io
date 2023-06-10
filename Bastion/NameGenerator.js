@@ -6,14 +6,30 @@ function upperFirst(string) {
     return string[0].toUpperCase() + string.substring(1);
 }
 
+function removeDoubleFirst(word) {
+    if (word[0] == word[1])
+        return word.slice(1, word.length);
+    return word;
+}
+
+function removeDoubleLast(word) {
+    if (word[word.length - 2] == word[word.length - 1])
+        return word.slice(0, word.length - 1);
+    return word;
+}
+
+function removeDoubleExtremities(word) {
+    return removeDoubleFirst(removeDoubleLast(word));
+}
+
 class SyllabusNode {
     constructor(letters, chance) {
         this.letters = letters;
         this.chance = chance;
     }
 
-    generate() {
-        if (Math.random() < this.chance)
+    generate(i, l) {
+        if (this.chance(i, l))
             return this.letters[rand(0, this.letters.length)];
         return "";
     }
@@ -42,15 +58,15 @@ class Language {
         /* 
         this.patterns = ["^.+$"];
         this.patterns_n = ["Default"]; */
-        this.patterns = [new LPattern("Default", "^.+$", x => x)]
+        this.patterns = [new LPattern("Default", "^.+$", x => removeDoubleExtremities(x))]
     }
 
-    generate() {
+    generateBaseWord() {
         var word = "";
         var len = rand(this.min, this.max + 1);
         for (var j = 0; j < len; j++) {
             for (var i = 0; i < this.nodes.length; i++) {
-                word += this.nodes[i].generate();
+                word += this.nodes[i].generate(j, len);
             }   
         }
         return word;
@@ -60,71 +76,45 @@ class Language {
         var tests = 0;
         var word = "";
         do {
-            word = this.generate();
+            word = this.generateBaseWord();
             tests++;
         } while (!this.doesFit(word, mode) && tests < 100);
 
         if (tests == 100)
             return "Error : no word fits mode";
 
-        return this.patterns[mode].process(word);
+        let nword = this.patterns[mode].process(word);
+
+        if (word != nword) {
+            console.log("base : " + word + "\nnew : " + nword);
+        }
+
+        return nword;
     }
-    
-    /*
-    generateGendered(female, neutral, male) {
-        if (!female && !neutral && !male)
-            return this.generate();
-
-        var tests = 0;
-        var word = "";
-        do {
-            word = this.generate();
-            tests++;
-        } while (!this.doesFit(word, female, neutral, male) && tests < 100);
-
-        if (tests == 100)
-            return "Error : no word fits gender tests";
-
-        return word;
-    }
-
-    isName(word) {
-        return this.isMale(word) || this.isFemale(word) || this.isNeutral(word);
-    }
-    */
 
     doesFit(word, mode) {
         return this.patterns[mode].fits(word);
     }
 }
 
-// Langues par défaut
-/*
-const wehejam = new Language("wehejam", "Wehèjam",
-[
-    new SyllabusNode(["b", "d", "f", "h", "j", "k", "m", "n", "r", "s", "w", "z"], 1), // C
-    new SyllabusNode(["a", "i", "e", "a", "i", "e", "a", "i", "e", "à", "ì", "è"], 1), // V
-    new SyllabusNode(["b", "h", "k", "m", "n", "z"], .2), // (C)
-], 2, 6);
-wehejam.malePattern = "^.+[iì]$";
-wehejam.femalePattern = "^.+[aà]$";
-wehejam.neutralPattern = "^.+[eè]$";
-*/
-
 const ginio = new Language("ginio", "Ginio",
 [
+    new SyllabusNode(["i", "o", "a", "e"], (x, l) => {
+        if (x == 0 && Math.random() < .5)
+            return true;
+        return false;
+    }), // V
     new SyllabusNode(["b", "g", "z", "k", "m", "n", "l", "ll", "s", "ss", "tt", "t", "p",
-                        "st", "sp", "sm", "ks", "kn", "km", "ks", "ph"], 1), // C
-    new SyllabusNode(["i", "o", "a", "e", "io", "ia"], 1), // V
+                        "st", "sp", "sm", "ks", "kn", "km", "ks", "ph"], (x, l) => true), // C
+    new SyllabusNode(["i", "o", "a", "e", "io", "ia"], (x, l) => true), // V
 ], 2, 4);
-
 ginio.patterns.push(new LPattern("Prénom", "^.+[iuoaes]$", 
     x => {
         if (rand(0, 10) < 2) {
             x = x + "s";
         }
 
-        return upperFirst(x);
+        return upperFirst(removeDoubleExtremities(x));
     }));
 
 const languages = [
