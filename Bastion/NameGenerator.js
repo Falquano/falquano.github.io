@@ -1,5 +1,3 @@
-// Version 0.4.0
-
 function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -219,7 +217,7 @@ getsan.modes.push(new Mode("Entité", quickValidate("^.+$"), x => {
     return accentuateBeforeLast(x);
 }))
 
-const ancient = new Language("ancient", "Ancient", [
+const ancientTsatsoumekhu = new Language("ancienttsatsoumekhu", "Ancient Tsatsoumekhu", [
     new RepeatNode(new LinearNode([
         new RandomLetterNode(["kh", "xh", "ss", "ph", "m", "th", "ts", "l"]), // C
         new RandomLetterNode(["a", "e", "u", "ou"]), // V
@@ -229,7 +227,7 @@ const ancient = new Language("ancient", "Ancient", [
 const languages = [
     ginio,
     getsan,
-    ancient
+    ancientTsatsoumekhu
 ];
 
 function getLanguage(languageName) {
