@@ -224,10 +224,19 @@ const ancientTsatsoumekhu = new Language("ancienttsatsoumekhu", "Ancient Tsatsou
     ]), 1, 5)
 ]);
 
+const tatomku = new Language("tatomku", "Tatomku", [
+    new RepeatNode(new LinearNode([
+        new RandomLetterNode(["k", "s", "f", "m", "t", "l", "p", "b"]), // C
+        new RandomLetterNode(["a", "e", "u", "o", "i"]), // V
+        new ChanceNode(new RandomLetterNode(["k", "s", "f", "m", "t", "l", "p", "b"]), .15)
+    ]), 1, 5)
+]);
+
 const languages = [
     ginio,
     getsan,
-    ancientTsatsoumekhu
+    ancientTsatsoumekhu,
+    tatomku
 ];
 
 function getLanguage(languageName) {
