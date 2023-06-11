@@ -38,6 +38,7 @@
             }
 
             selectedLanguage = getLanguage(language);
+            document.getElementById("mode").value = 0;
             console.log("Language changed : " + getRequestDescription(language, getMode()));
 
             if (selectedLanguage == null)
