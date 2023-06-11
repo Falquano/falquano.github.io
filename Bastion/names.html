@@ -13,7 +13,7 @@
             var word = language;
             
             if (selectedLanguage)
-                word += " (" + selectedLanguage.patterns[mode].name + ")";
+                word += " (" + selectedLanguage.modes[mode].name + ")";
 
             return word;
         }
@@ -61,9 +61,9 @@
                 }
                 
                 // On ajoute les modes
-                for (let i = 1; i < selectedLanguage.patterns.length; i++) {
+                for (let i = 1; i < selectedLanguage.modes.length; i++) {
                     let opt = select.appendChild(document.createElement("option"));
-                    opt.innerHTML = selectedLanguage.patterns[i].name;
+                    opt.innerHTML = selectedLanguage.modes[i].name;
                     opt.value = i;
                 }
             }

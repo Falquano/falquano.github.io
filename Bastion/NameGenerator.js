@@ -10,7 +10,6 @@ String.prototype.replaceAt = function(index, replacement) {
     return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
 
-
 function removeDoubleFirst(word) {
     if (word[0] == word[1])
         return word.slice(1, word.length);
@@ -27,24 +26,86 @@ function removeDoubleExtremities(word) {
     return removeDoubleFirst(removeDoubleLast(word));
 }
 
-class SyllabusNode {
-    constructor(letters, chance) {
-        this.letters = letters;
-        this.chance = chance;
-    }
-
-    generate(i, l) {
-        if (this.chance(i, l))
-            return this.letters[rand(0, this.letters.length)];
+class Node {
+    generate() {
         return "";
     }
 }
 
-class LPattern {
-    constructor(name, workablePattern, process) {
+class LetterNode extends Node {
+    constructor(letter) {
+        super();
+        this.letter = letter;
+    }
+
+    generate() {
+        return this.letter;
+    }
+}
+
+class RandomLetterNode extends LetterNode {
+    constructor(letters) {
+        super();
+        this.letters = letters;
+    }
+
+    generate() {
+        return this.letters[rand(0, this.letters.length)];
+    }
+}
+
+class LinearNode extends Node {
+    constructor(children) {
+        super();
+        this.children = children;
+    }
+
+    generate() {
+        var word = "";
+        for (var i = 0; i < this.children.length; i++) {
+            word += this.children[i].generate();
+        }
+        return word;
+    }
+}
+
+class RepeatNode extends Node {
+    constructor(child, minlength, maxlength) {
+        super();
+        this.child = child;
+        this.minlength = minlength;
+        this.maxlength = maxlength;
+    }
+
+    generate() {
+        var word = "";
+        var len = rand(this.minlength, this.maxlength + 1);
+        for (var j = 0; j < len; j++) {
+            word += this.child.generate();
+        }
+        return word;
+    }
+}
+
+class ChanceNode extends Node {
+    constructor(_child, _chance) {
+        super();
+        this.child = _child;
+        this.chance = _chance;
+    }
+
+    generate() {
+        if (Math.random() < this.chance)
+            return this.child.generate();
+        return "";
+    }
+}
+
+class Mode {
+    constructor(name, validPattern, postprocess) {
         this.name = name;
-        this.pattern = workablePattern;
-        this.process = process;
+        this.pattern = validPattern;
+        this.process = postprocess;
     }
 
     fits(word) {
@@ -54,27 +115,15 @@ class LPattern {
 }
 
 class Language {
-    constructor(id, name, nodes, min = 2, max = 5) {
+    constructor(id, name, nodes) {
         this.id = id;
         this.name = name;
-        this.nodes = nodes;
-        this.min = min;
-        this.max = max;
-        /* 
-        this.patterns = ["^.+$"];
-        this.patterns_n = ["Default"]; */
-        this.patterns = [new LPattern("Default", "^.+$", x => removeDoubleExtremities(x))]
+        this.root = new LinearNode(nodes);
+        this.modes = [new Mode("Default", "^.+$", x => removeDoubleExtremities(x))]
     }
 
     generateBaseWord() {
-        var word = "";
-        var len = rand(this.min, this.max + 1);
-        for (var j = 0; j < len; j++) {
-            for (var i = 0; i < this.nodes.length; i++) {
-                word += this.nodes[i].generate(j, len);
-            }   
-        }
-        return word;
+        return this.root.generate();
     }
 
     generateModed(mode) {
@@ -83,44 +132,37 @@ class Language {
         do {
             word = this.generateBaseWord();
             tests++;
-        } while (!this.doesFit(word, mode) && tests < 100);
+        } while (!this.modes[mode].fits(word) && tests < 100);
 
-        if (tests == 100)
+        if (tests >= 100)
             return "Error : no word fits mode";
 
-        let nword = this.patterns[mode].process(word);
+        let nword = this.modes[mode].process(word);
 
-        if (word != nword) {
+        /*if (word != nword) {
             console.log("base : " + word + "\nnew : " + nword);
-        }
+        }*/
 
         return nword;
-    }
-
-    doesFit(word, mode) {
-        return this.patterns[mode].fits(word);
     }
 }
 
 const ginio = new Language("ginio", "Ginio",
 [
-    new SyllabusNode(["i", "o", "a", "e"], (x, l) => {
-        if (x == 0 && Math.random() < .5)
-            return true;
-        return false;
-    }), // V
-    new SyllabusNode(["b", "g", "z", "k", "m", "n", "l", "ll", "s", "ss", "tt", "t", "p",
-                        "st", "sp", "sm", "ks", "kn", "km", "ks", "ph"], (x, l) => true), // C
-    new SyllabusNode(["i", "o", "a", "e", "io", "ia"], (x, l) => true), // V
-], 2, 4);
-ginio.patterns.push(new LPattern("Prénom", "^.+[iuoaes]$", 
-    x => {
-        if (rand(0, 10) < 2) {
-            x = x + "s";
-        }
+    new ChanceNode(new RandomLetterNode(["i", "o", "a", "e"]), .5), // V
 
-        return upperFirst(removeDoubleExtremities(x));
-    }));
+    new RepeatNode(new LinearNode([
+        new RandomLetterNode(["b", "g", "z", "k", "m", "n", "l", "ll", "s", "ss", "tt", "t", "p",
+                        "st", "sp", "sm", "ks", "kn", "km", "ks", "ph"]), // C
+        new RandomLetterNode(["i", "o", "a", "e", "io", "ia"]) // V
+    ]), 1, 3),
+
+    new ChanceNode(new RandomLetterNode(["b", "g", "z", "k", "m", "n", "l", "ll", "s", "ss", "tt", "t", "p",
+    "st", "sp", "sm", "ks", "kn", "km", "ks", "ph"]), .45) // (C)
+]);
+ginio.modes.push(new Mode("Prénom", "^..+[iuoaes]$", 
+    x => upperFirst(removeDoubleExtremities(x))
+));
 
 const baccents = {
     "e": ["é", "è", "ë"],
@@ -141,11 +183,13 @@ function accentuateLast(word) {
 }
 
 const b = new Language("b", "B", [
-    new SyllabusNode(["pf", "ts", "ch", "sh", "g", "y", "b", "d", "v"], (x, l) => true), // C
-    new SyllabusNode(["e", "u", "a", "o"], (x, l) => true), // V
-    new SyllabusNode(["ch", "sh", "g", "y", "b", "d", "v"], (x, l) => Math.random() < .2), // C
-], 2, 5);
-b.patterns.push(new LPattern("Person", "^.+$", x => {
+    new RepeatNode(new LinearNode([
+        new RandomLetterNode(["pf", "ts", "ch", "sh", "g", "y", "b", "d", "v"]), // C
+        new RandomLetterNode(["e", "u", "a", "o"]), // V
+        new ChanceNode(new RandomLetterNode(["ch", "sh", "g", "y", "b", "d", "v"]), .2), // (C)
+    ]), 2, 4)
+]);
+b.modes.push(new Mode("Prénom", "^.+$", x => {
     return upperFirst(accentuateLast(x));
 }))
 
