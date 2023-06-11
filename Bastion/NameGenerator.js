@@ -140,8 +140,7 @@ function accentuateLast(word) {
     return word;
 }
 
-const b = new Language("b", "B",
-[
+const b = new Language("b", "B", [
     new SyllabusNode(["pf", "ts", "ch", "sh", "g", "y", "b", "d", "v"], (x, l) => true), // C
     new SyllabusNode(["e", "u", "a", "o"], (x, l) => true), // V
     new SyllabusNode(["ch", "sh", "g", "y", "b", "d", "v"], (x, l) => Math.random() < .2), // C
