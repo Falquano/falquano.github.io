@@ -1,4 +1,4 @@
-// Version 0.3.1
+// Version 0.4.0
 
 function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -26,6 +26,14 @@ function removeDoubleLast(word) {
 
 function removeDoubleExtremities(word) {
     return removeDoubleFirst(removeDoubleLast(word));
+}
+
+function validateRegex(word, regex) {
+    return new RegExp(regex).test(word);
+}
+
+function quickValidate(regex) {
+    return x => validateRegex(x, regex);
 }
 
 class Node {
@@ -104,15 +112,14 @@ class ChanceNode extends Node {
 }
 
 class Mode {
-    constructor(name, validPattern, postprocess) {
+    constructor(name, validationFunction, postprocess) {
         this.name = name;
-        this.pattern = validPattern;
+        this.validate = validationFunction;
         this.process = postprocess;
     }
 
     fits(word) {
-        let re = new RegExp(this.pattern);
-        return re.test(word);
+        return this.validate(word);
     }
 }
 
@@ -121,7 +128,7 @@ class Language {
         this.id = id;
         this.name = name;
         this.root = new LinearNode(nodes);
-        this.modes = [new Mode("Default", "^...+$", x => removeDoubleExtremities(x))]
+        this.modes = [new Mode("Default", quickValidate("^...+$"), x => removeDoubleExtremities(x))]
     }
 
     generateBaseWord() {
@@ -162,7 +169,7 @@ const ginio = new Language("ginio", "Ginio",
     new ChanceNode(new RandomLetterNode(["b", "g", "z", "k", "m", "n", "l", "ll", "s", "ss", "tt", "t", "p",
     "st", "sp", "sm", "ks", "kn", "km", "ks", "ph"]), .45) // (C)
 ]);
-ginio.modes.push(new Mode("Prénom", "^..+[iuoaes]$", 
+ginio.modes.push(new Mode("Prénom", quickValidate("^..+[iuoaes]$"), 
     x => upperFirst(removeDoubleExtremities(x))
 ));
 
@@ -205,10 +212,10 @@ const getsan = new Language("getsan", "Getsan", [
         new ChanceNode(new RandomLetterNode(["ch", "sh", "g", "y", "b", "d", "v"]), .2), // (C)
     ]), 2, 4)
 ]);
-getsan.modes.push(new Mode("Prénom", "^.+$", x => {
+getsan.modes.push(new Mode("Prénom", quickValidate("^.+$"), x => {
     return upperFirst(accentuateLast(x));
 }))
-getsan.modes.push(new Mode("Entité", "^.+$", x => {
+getsan.modes.push(new Mode("Entité", quickValidate("^.+$"), x => {
     return accentuateBeforeLast(x);
 }))
 
