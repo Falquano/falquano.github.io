@@ -19,8 +19,6 @@
         }
 
         function updateNames() {
-            console.log("UPDATE");
-
             if (selectedLanguage == null)
                 return; 
 
@@ -31,18 +29,16 @@
             }
 
             document.getElementById("names").innerHTML = noms;
-            console.log("done !");
         }
 
         function changeLanguage(language) {
             if (selectedLanguage == getLanguage(language)) {
-                console.log(getRequestDescription(language, getMode()));
                 updateNames();
                 return;
             }
 
             selectedLanguage = getLanguage(language);
-            console.log(getRequestDescription(language, getMode()));
+            console.log("Language changed : " + getRequestDescription(language, getMode()));
 
             if (selectedLanguage == null)
             {
