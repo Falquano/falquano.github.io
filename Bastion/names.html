@@ -71,6 +71,17 @@
         function getMode() {
             return document.getElementById("mode").value;
         }
+
+        function setupLanguages() {
+            languages.forEach(x => addLanguage(x));
+        }
+
+        function addLanguage(lang) {
+            let langs = document.getElementById("languages");
+            let button = langs.appendChild(document.createElement("button"));
+            button.setAttribute("onclick", "changeLanguage('" + lang.id + "')");
+            button.innerHTML = lang.name;
+        }
     </script>
 </head>
 <body>
@@ -81,10 +92,12 @@
     <h1 id="currentLanguage">Langue</h1>
     <br>
     <div id="nameoptions">
-        <div>
+        <div id="languages">
+            <!--
             <button onclick="changeLanguage('ginio')">Ginio</button>
             <button onclick="changeLanguage('getsan')">Getsan</button>
             <button onclick="changeLanguage('c')">C</button>
+            -->
         </div>
         </br>
         <select name="mode" id="mode" onchange="updateNames()">
@@ -97,6 +110,7 @@
     </div>
 </body>
 <script>
+    setupLanguages();
     changeLanguage(getRandomLanguage().id);
 </script>
 </HTML>
