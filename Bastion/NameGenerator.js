@@ -219,9 +219,17 @@ getsan.modes.push(new Mode("Entité", quickValidate("^.+$"), x => {
     return accentuateBeforeLast(x);
 }))
 
+const ancient = new Language("ancient", "Ancient", [
+    new RepeatNode(new LinearNode([
+        new RandomLetterNode(["kh", "xh", "ss", "ph", "m", "th", "ts", "l"]), // C
+        new RandomLetterNode(["a", "e", "u", "ou"]), // V
+    ]), 1, 5)
+]);
+
 const languages = [
     ginio,
-    getsan
+    getsan,
+    ancient
 ];
 
 function getLanguage(languageName) {
