@@ -37,6 +37,31 @@ h1, h2, h3, #title, #author {
     text-align: center;
 }
 
+#languages {
+    border-width: 1px 0px;
+    border-color: #b8b6a7;
+    border-style: solid;
+
+    padding: 6px;
+}
+
+#languages > button, select {
+    margin: 0px 3px;
+
+    border: 1px solid #b8b6a7;
+    background-color: #f7f7eb;
+
+    transition: .2s background-color;
+}
+
+#languages > button:hover, select:hover {
+    background-color: #fCfCF1;
+}
+
+#languages > button:active {
+    background-color: #f2f2e6;
+}
+
 .langage table, .langage th, .langage td {
     border: 1px solid black;
     text-align: center;
