@@ -1,3 +1,5 @@
+// Version 0.3.1
+
 function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -119,7 +121,7 @@ class Language {
         this.id = id;
         this.name = name;
         this.root = new LinearNode(nodes);
-        this.modes = [new Mode("Default", "^.+$", x => removeDoubleExtremities(x))]
+        this.modes = [new Mode("Default", "^...+$", x => removeDoubleExtremities(x))]
     }
 
     generateBaseWord() {
@@ -182,20 +184,37 @@ function accentuateLast(word) {
     return word;
 }
 
-const b = new Language("b", "B", [
+function accentuateBeforeLast(word) {
+    let n = 0;
+    for(let i = word.length - 1; i > 0; i--) {
+        if (bowels.includes(word[i])) {
+            n += 1;
+            if (n > 1) {
+                let nword = word;
+                return nword.replaceAt(i, baccents[nword[i]][rand(0, baccents[nword[i]].length)]);
+            }
+        }
+    }
+    return word;
+}
+
+const getsan = new Language("getsan", "Getsan", [
     new RepeatNode(new LinearNode([
         new RandomLetterNode(["pf", "ts", "ch", "sh", "g", "y", "b", "d", "v"]), // C
-        new RandomLetterNode(["e", "u", "a", "o"]), // V
+        new RandomLetterNode(["e", "u", "a", "o", "an"]), // V
         new ChanceNode(new RandomLetterNode(["ch", "sh", "g", "y", "b", "d", "v"]), .2), // (C)
     ]), 2, 4)
 ]);
-b.modes.push(new Mode("Prénom", "^.+$", x => {
+getsan.modes.push(new Mode("Prénom", "^.+$", x => {
     return upperFirst(accentuateLast(x));
+}))
+getsan.modes.push(new Mode("Entité", "^.+$", x => {
+    return accentuateBeforeLast(x);
 }))
 
 const languages = [
     ginio,
-    b
+    getsan
 ];
 
 function getLanguage(languageName) {
