@@ -1,3 +1,7 @@
+function niceModulo(v, m) {
+    return ((v % m) + m) % m;
+}
+
 function rand(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -252,6 +256,12 @@ const languages = [
 
 function getLanguage(languageName) {
     return languages.find(element => element.id.toLowerCase() == languageName.toLowerCase());
+}
+
+// Retourne le language à offset position du language actuel
+function getLanguageIndexed(currentLanguage, offset) {
+    let curi = languages.indexOf(currentLanguage);
+    return languages[niceModulo(curi + offset, languages.length)];
 }
 
 function getRandomLanguage() {

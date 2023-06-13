@@ -44,19 +44,25 @@
             pushNewUrl();
         }
 
-        function changeLanguage(language) {
-            if (selectedLanguage == getLanguage(language)) {
+        function changeLanguage(languageId) {
+            if (selectedLanguage == getLanguage(languageId)) {
                 updateNames();
                 return;
             }
 
             let prevModeName = "";
             if (selectedLanguage != null)
-                prevModeName = selectedLanguage.modes[getMode()].name;
+            {
+                // On déselectionne le bouton
+                document.getElementById(selectedLanguage.id + "btn").classList.remove("selected");
 
-            selectedLanguage = getLanguage(language);
+                // On mémorise le nom du mode
+                prevModeName = selectedLanguage.modes[getMode()].name;
+            }
+
+            selectedLanguage = getLanguage(languageId);
             document.getElementById("mode").value = 0;
-            console.log("Language changed : " + getRequestDescription(language, getMode()));
+            console.log("Language changed : " + getRequestDescription(languageId, getMode()));
 
             if (selectedLanguage == null)
             {
@@ -80,11 +86,16 @@
                     opt.innerHTML = selectedLanguage.modes[i].name;
                     opt.value = i;
 
+                    // Si on trouve un mode similaire on le récupère
+                    // #TODO : c'est nul il faudrait un système plus poussé pour reconnaitre les modes :c
                     if (selectedLanguage.modes[i].name == prevModeName) {
                         document.getElementById("mode").value = i;
                     }
                 }
             }
+
+            // Sélectionne le bouton
+            document.getElementById(selectedLanguage.id + "btn").classList.add("selected");
 
             pushNewUrl();
 
@@ -103,8 +114,38 @@
             let langs = document.getElementById("languages");
             let button = langs.appendChild(document.createElement("button"));
             button.setAttribute("onclick", "changeLanguage('" + lang.id + "')");
+            button.setAttribute("class", "languagebutton");
+            button.setAttribute("id", lang.id + "btn");
             button.innerHTML = lang.name;
         }
+
+        function offsetMode(offset) {
+            document.getElementById("mode").value = niceModulo(parseInt(document.getElementById("mode").value) + offset, selectedLanguage.modes.length);
+            pushNewUrl();
+            updateNames();
+        }
+
+        function nextMode() {
+            offsetMode(1);
+        }
+
+        function prevMode() 
+        {
+            offsetMode(-1);
+        }
+
+        //==========//
+        // KEYBOARD //
+        //==========//
+
+        const KEYDOWN = {}
+        KEYDOWN.r = () => updateNames();
+        KEYDOWN[' '] = () => updateNames();
+        KEYDOWN.ArrowLeft = () => changeLanguage(getLanguageIndexed(selectedLanguage, -1).id);
+        KEYDOWN.ArrowRight = () => changeLanguage(getLanguageIndexed(selectedLanguage, 1).id);
+        KEYDOWN.ArrowDown = () => offsetMode(1);
+        KEYDOWN.ArrowUp = () => offsetMode(-1);
+
     </script>
 </head>
 <body>
@@ -141,5 +182,12 @@
         document.getElementById("mode").value = 0;
     }
     updateNames();
+
+    // KEYBOARD SETUP
+    document.body.onkeydown = (e) => {
+            const keydown = KEYDOWN[e.key]
+            if (keydown !== undefined) keydown(e)
+            else console.log("unhandled input %o", e);
+        };
 </script>
 </HTML>
