@@ -122,7 +122,8 @@ class Mode {
 }
 
 class Language {
-    constructor(id, name, nodes) {
+    constructor(category, id, name, nodes) {
+        this.category = category;
         this.id = id;
         this.name = name;
         this.root = new LinearNode(nodes);
@@ -154,7 +155,7 @@ class Language {
     }
 }
 
-const ginio = new Language("ginio", "Ginio",
+const ginio = new Language("main", "ginio", "Ginio",
 [
     new ChanceNode(new RandomLetterNode(["i", "o", "a", "e"]), .5), // V
 
@@ -203,7 +204,7 @@ function accentuateBeforeLast(word) {
     return word;
 }
 
-const getsan = new Language("getsan", "Getsan", [
+const getsan = new Language("main", "getsan", "Getsan", [
     new RepeatNode(new LinearNode([
         new RandomLetterNode(["pf", "ts", "ch", "sh", "g", "y", "b", "d", "v"]), // C
         new RandomLetterNode(["e", "u", "a", "o", "an"]), // V
@@ -212,19 +213,28 @@ const getsan = new Language("getsan", "Getsan", [
 ]);
 getsan.modes.push(new Mode("Prénom", quickValidate("^.+$"), x => {
     return upperFirst(accentuateLast(x));
-}))
+}));
 getsan.modes.push(new Mode("Entité", quickValidate("^.+$"), x => {
     return accentuateBeforeLast(x);
-}))
+}));
 
-const ancientTsatsoumekhu = new Language("ancienttsatsoumekhu", "Ancient Tsatsoumekhu", [
+
+const euchir = new Language("main", "euchir", "Euchir", [
+    new RepeatNode(new LinearNode([
+        new ChanceNode(new RandomLetterNode(["j", "w"]), .07), // approximants
+        new RandomLetterNode(["i", "u", "ou", "o", "a", "eu", "é"]), // V
+        new RandomLetterNode(["m", "p", "b", "f", "v", "t", "ts", "n", "s", "r", "l", "tch", "ch"]), // C
+    ]), 2, 4)
+]);
+
+const ancientTsatsoumekhu = new Language("hihi", "ancienttsatsoumekhu", "Ancient Tsatsoumekhu", [
     new RepeatNode(new LinearNode([
         new RandomLetterNode(["kh", "xh", "ss", "ph", "m", "th", "ts", "l"]), // C
         new RandomLetterNode(["a", "e", "u", "ou"]), // V
     ]), 1, 5)
 ]);
 
-const tatomku = new Language("tatomku", "Tatomku", [
+const tatomku = new Language("hihi", "tatomku", "Tatomku", [
     new RepeatNode(new LinearNode([
         new RandomLetterNode(["k", "s", "f", "m", "t", "l", "p", "b"]), // C
         new RandomLetterNode(["a", "e", "u", "o", "i"]), // V
@@ -235,6 +245,7 @@ const tatomku = new Language("tatomku", "Tatomku", [
 const languages = [
     ginio,
     getsan,
+    euchir,
     ancientTsatsoumekhu,
     tatomku
 ];
@@ -246,7 +257,6 @@ function getLanguage(languageName) {
 function getRandomLanguage() {
     return languages[rand(0, languages.length)];
 }
-
 
 function getNameModed(languageName, mode) {
     var language = getLanguage(languageName);
@@ -265,4 +275,26 @@ function getWord(languageName) {
     if (language == null)
         return "Language " + languageName + " not found !";
     return language.generate();
+}
+
+function getCategories() {
+    let cats = [];
+
+    languages.forEach(x => {
+        if (!cats.includes(x.category))
+            cats.push(x.category);
+    })
+    
+    return cats;
+}
+
+function compareLanguages(a, b) {
+    let /*c = a.category.localeCompare(b.category);
+    if (c == 0)*/
+        c = a.name.localeCompare(b.name);
+    return c;
+}
+
+function sortLanguages() {
+    languages.sort(compareLanguages);
 }
