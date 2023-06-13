@@ -62,6 +62,24 @@ h1, h2, h3, #title, #author {
     background-color: #f2f2e6;
 }
 
+#languages > button.selected {
+    margin: 0px 3px;
+
+    border: 1px solid #841020;
+    background-color: #f7f7eb;
+    color: #841020;
+
+    transition: .2s background-color;
+}
+
+#languages > button:hover.selected {
+    background-color: #fCfCF1;
+}
+
+#languages > button:active.selected {
+    background-color: #f2f2e6;
+}
+
 .langage table, .langage th, .langage td {
     border: 1px solid black;
     text-align: center;
