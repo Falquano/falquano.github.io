@@ -7,7 +7,14 @@
     <script type="text/javascript" src="NameGenerator.js"></script>
 
     <script>
+        const url = new URL(window.location.href)
+        const searchParams = url.searchParams;
+
         var selectedLanguage;
+
+        function pushNewUrl() {
+            history.pushState("namegenerator", "", "names.html?language=" + selectedLanguage.id + "&mode=" + getMode());
+        }
 
         function getRequestDescription(language, mode) {
             var word = language;
@@ -31,11 +38,21 @@
             document.getElementById("names").innerHTML = noms;
         }
 
+        function changeMode() {
+            searchParams.set("language", selectedLanguage.id);
+            searchParams.set("mode", getMode());
+            pushNewUrl();
+        }
+
         function changeLanguage(language) {
             if (selectedLanguage == getLanguage(language)) {
                 updateNames();
                 return;
             }
+
+            let prevModeName = "";
+            if (selectedLanguage != null)
+                prevModeName = selectedLanguage.modes[getMode()].name;
 
             selectedLanguage = getLanguage(language);
             document.getElementById("mode").value = 0;
@@ -62,8 +79,14 @@
                     let opt = select.appendChild(document.createElement("option"));
                     opt.innerHTML = selectedLanguage.modes[i].name;
                     opt.value = i;
+
+                    if (selectedLanguage.modes[i].name == prevModeName) {
+                        document.getElementById("mode").value = i;
+                    }
                 }
             }
+
+            pushNewUrl();
 
             updateNames();
         }
@@ -92,14 +115,9 @@
     <h1 id="currentLanguage">Langue</h1>
     <div id="nameoptions">
         <div id="languages">
-            <!--
-            <button onclick="changeLanguage('ginio')">Ginio</button>
-            <button onclick="changeLanguage('getsan')">Getsan</button>
-            <button onclick="changeLanguage('c')">C</button>
-            -->
         </div>
         </br>
-        <select name="mode" id="mode" onchange="updateNames()">
+        <select name="mode" id="mode" onchange="updateNames(), changeMode()">
             <option value=0>Default</option>
         </select>
     </div>
@@ -110,6 +128,18 @@
 </body>
 <script>
     setupLanguages();
-    changeLanguage(getRandomLanguage().id);
+    if (searchParams.has("language")) {
+        changeLanguage(searchParams.get("language"));
+    } else {
+        changeLanguage(getRandomLanguage().id);
+    }
+    
+    if (searchParams.has("mode")) {
+        document.getElementById("mode").value = searchParams.get("mode");
+        pushNewUrl();
+    } else {
+        document.getElementById("mode").value = 0;
+    }
+    updateNames();
 </script>
 </HTML>
