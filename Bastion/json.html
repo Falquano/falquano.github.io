@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Bastion - Noms</title>
+        <script type="text/javascript" src="NameGenerator.js"></script>
+
+        
+        <script>
+            const url = new URL(window.location.href)
+            const searchParams = url.searchParams;
+            
+            var amount;
+            var language;
+            var mode;
+
+            function updateNames() {
+                if (language == null)
+                    return; 
+
+                var noms = "";
+                for (var i = 0; i < amount; i++) {
+                    //noms += getName(language) + "<br>"; 
+                    noms += "\"" + getNameModed(language.id, mode) + "\"";
+                    if (i < amount - 1) {
+                        noms += ", <br>";
+                    }
+                }
+
+                document.getElementById("names").innerHTML = noms;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="json">
+            {
+                <div>
+                    "names" : 
+                    [
+                        <div id="names">
+
+                        </div>
+                    ]
+                </div>
+            }
+        </div>
+    </body>
+    <script>
+        if (searchParams.has("language")) {
+            language = getLanguage(searchParams.get("language"));
+        } else {
+            language = getRandomLanguage();
+        }
+        
+        if (searchParams.has("mode")) {
+            mode = searchParams.get("mode");
+        } else {
+            mode = 0;
+        }
+        
+        if (searchParams.has("amount")) {
+            amount = searchParams.get("amount");
+        } else {
+            amount = 25;
+        }
+        updateNames();
+    </script>
+</html>
